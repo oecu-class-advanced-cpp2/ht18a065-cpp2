@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -28,6 +29,7 @@ namespace cpp2 {
 		*/
 		/* ----------------------------------------------------------------- */
 		mcxi(const std::string& s) : value_(0) {
+
 			char car1[4] = { 'm','c','x','i' };
 			char car2[8] = { '2','3','4','5','6','7','8','9' };
 			int num[4] = { 1000,100,10,1};
@@ -44,7 +46,7 @@ namespace cpp2 {
 					}
 				}
 			}
-			cout << result << endl;
+			value_ = result;
 		}
 
 
@@ -55,8 +57,14 @@ namespace cpp2 {
 		2 つのオブジェクトの加算結果を取得します。
 		*/
 		/* ----------------------------------------------------------------- */
-		mcxi operator+(const mcxi& rhs) {
-			return rhs;
+		
+		mcxi operator+(const mcxi &rhs) {	
+			mcxi num = this->value_ + rhs.value_;
+			return num;
+		}
+
+		mcxi(int value_) {
+			this->value_ = value_;
 		}
 
 		/* ----------------------------------------------------------------- */
@@ -67,8 +75,26 @@ namespace cpp2 {
 		*/
 		/* ----------------------------------------------------------------- */
 		std::string to_string() const {
-			string a;
-			return a;
+			//value_=11
+			stringstream result0;
+			int main = value_;
+			int sub = 0;
+			int num[4] = { 1000,100,10,1};
+			string str[4] = { "m","c","x","i" };
+
+			for (int i = 0; i < 4; i++) {
+				int q =  main/ num[i];
+				if (q == 1) {
+					result0 << str[i];
+					main= main-num[i];
+				}
+				if (q > 1) {
+					result0 << q;
+					result0 << str[i];
+					main=main- (num[i] * q);
+				}
+		}
+		return	result0.str();
 		}
 
 	private:
@@ -80,53 +106,53 @@ int main() {
 	cpp2::mcxi a0("xi");
 	cpp2::mcxi b0("x9i");
 	auto result0 = a0 + b0;
-	std::cout << "3x" << " " << result0.to_string() << std::endl;
+	std::cout << "正 " << "3x" << "      /解 " << result0.to_string() << std::endl;
 
 	cpp2::mcxi a1("i");
 	cpp2::mcxi b1("9i");
 	auto result1 = a1 + b1;
-	std::cout << "x" << " " << result1.to_string() << std::endl;
+	std::cout << "正 " << "x" << "       /解 " << result1.to_string() << std::endl;
 
-	cpp2::mcxi a2("c2x2i");
-	cpp2::mcxi b2("4c8x8i");
-	auto result2 = a2 + b2;
-	std::cout << "6cx" << " " << result2.to_string() << std::endl;
+	cpp2::mcxi a2("c2x2i"); //122
+	cpp2::mcxi b2("4c8x8i");//488
+	auto result2 = a2 + b2; //610
+	std::cout << "正 " << "6cx" << "     /解 " << result2.to_string() << std::endl;
 
 	cpp2::mcxi a3("m2ci");
 	cpp2::mcxi b3("4m7c9x8i");
 	auto result3 = a3 + b3;
-	std::cout << "5m9c9x9i" << " " << result3.to_string() << std::endl;
+	std::cout << "正 " << "5m9c9x9i" << "/解 " << result3.to_string() << std::endl;
 
 	cpp2::mcxi a4("9c9x9i");
 	cpp2::mcxi b4("i");
 	auto result4 = a4 + b4;
-	std::cout << "m" << " " << result4.to_string() << std::endl;
+	std::cout << "正 " << "m" << "       /解 " << result4.to_string() << std::endl;
 
 	cpp2::mcxi a5("i");
 	cpp2::mcxi b5("9m9c9x8i");
 	auto result5 = a5 + b5;
-	std::cout << "9m9c9x9i" << " " << result5.to_string() << std::endl;
+	std::cout << "正 " << "9m9c9x9i" << "/解 " << result5.to_string() << std::endl;
 
 	cpp2::mcxi a6("m");
 	cpp2::mcxi b6("i");
 	auto result6 = a6 + b6;
-	std::cout << "mi" << " " << result6.to_string() << std::endl;
+	std::cout << "正 " << "mi" << "      /解 " << result6.to_string() << std::endl;
 
 	cpp2::mcxi a7("i");
 	cpp2::mcxi b7("m");
 	auto result7 = a7 + b7;
-	std::cout << "mi" << " " << result7.to_string() << std::endl;
+	std::cout << "正 " << "mi" << "      /解 " << result7.to_string() << std::endl;
 
 	cpp2::mcxi a8("m9i");
 	cpp2::mcxi b8("i");
 	auto result8 = a8 + b8;
-	std::cout << "mx" << " " << result8.to_string() << std::endl;
+	std::cout << "正 " << "mx" << "      /解 " << result8.to_string() << std::endl;
 
 	cpp2::mcxi a9("9m8c7xi");
 	cpp2::mcxi b9("c2x8i");
 	auto result9 = a9 + b9;
-	std::cout << "9m9c9x9i" << " " << result9.to_string() << std::endl;
-	
+	std::cout << "正 " << "9m9c9x9i" << "/解 " << result9.to_string() << std::endl;
+
 	std::cin.get();
 	return 0;
 }

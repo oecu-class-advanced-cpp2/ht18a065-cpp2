@@ -75,10 +75,8 @@ namespace cpp2 {
 		*/
 		/* ----------------------------------------------------------------- */
 		std::string to_string() const {
-			//value_=11
 			stringstream result0;
 			int main = value_;
-			int sub = 0;
 			int num[4] = { 1000,100,10,1};
 			string str[4] = { "m","c","x","i" };
 
